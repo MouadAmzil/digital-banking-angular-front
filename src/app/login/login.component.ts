@@ -10,6 +10,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   formLogin! : FormGroup;
+  loginValid:boolean=true;
    constructor (private fb : FormBuilder, private authService :AuthService,private router:Router) { }
    ngOnInit(): void {
      this. formLogin=this.fb.group({
@@ -22,8 +23,10 @@ export class LoginComponent implements OnInit {
     let pwd = this.formLogin.value.password;
     this.authService.login(username, pwd).subscribe(res=>{
       this.authService.loadProfile(res);
-      this.router.navigateByUrl("/admin")
+      this.router.navigateByUrl("/admin");
+      this.loginValid= true;
     },err=>{
+      this.loginValid= false;
       // this.router.navigateByUrl("/admin")
     }
     // ,
