@@ -17,7 +17,7 @@ export class AppHttpInterceptor implements HttpInterceptor {
     console. log(request.url);
     if(!request.url.includes("/auth/Login")){
     let newRequest = request.clone({
-    headers : request.headers.set("Authonization", "Bearer"+this.authService.accessToken)
+    headers : request.headers.set("Authorization", "Bearer "+this.authService.accessToken)
     })
     return next.handle(newRequest).pipe(
       catchError(err=>{
